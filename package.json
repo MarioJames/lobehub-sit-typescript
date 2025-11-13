@@ -1,5 +1,5 @@
 {
-  "name": "lobehub-sit",
+  "name": "lobehub",
   "version": "0.0.1",
   "description": "The official TypeScript library for the Lobehub Sit API",
   "author": "Lobehub Sit <>",
