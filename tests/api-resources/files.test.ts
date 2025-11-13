@@ -1,6 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import LobehubSit, { toFile } from 'lobehub';
+import LobehubSit, { toFile } from 'lobehub-sit';
 
 const client = new LobehubSit({
   apiKey: 'My API Key',
@@ -56,8 +56,8 @@ describe('resource files', () => {
   });
 
   // Prism tests are disabled
-  test.skip('batchRetrieve: only required params', async () => {
-    const responsePromise = client.files.batchRetrieve({ fileIds: ['string'] });
+  test.skip('batchGet: only required params', async () => {
+    const responsePromise = client.files.batchGet({ fileIds: ['string'] });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -68,8 +68,8 @@ describe('resource files', () => {
   });
 
   // Prism tests are disabled
-  test.skip('batchRetrieve: required and optional params', async () => {
-    const response = await client.files.batchRetrieve({ fileIds: ['string'] });
+  test.skip('batchGet: required and optional params', async () => {
+    const response = await client.files.batchGet({ fileIds: ['string'] });
   });
 
   // Prism tests are disabled
@@ -98,8 +98,8 @@ describe('resource files', () => {
   });
 
   // Prism tests are disabled
-  test.skip('generatePresignedURL', async () => {
-    const responsePromise = client.files.generatePresignedURL('id');
+  test.skip('getPresignedURL', async () => {
+    const responsePromise = client.files.getPresignedURL('id');
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -110,10 +110,10 @@ describe('resource files', () => {
   });
 
   // Prism tests are disabled
-  test.skip('generatePresignedURL: request options and params are passed correctly', async () => {
+  test.skip('getPresignedURL: request options and params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
-      client.files.generatePresignedURL('id', { expiresIn: 1 }, { path: '/_stainless_unknown_path' }),
+      client.files.getPresignedURL('id', { expiresIn: 1 }, { path: '/_stainless_unknown_path' }),
     ).rejects.toThrow(LobehubSit.NotFoundError);
   });
 
