@@ -1,6 +1,6 @@
 {
   "name": "lobehub-sit",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "The official TypeScript library for the Lobehub Sit API",
   "author": "Lobehub Sit <>",
   "types": "dist/index.d.ts",
