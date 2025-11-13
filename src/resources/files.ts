@@ -32,7 +32,7 @@ export class Files extends APIResource {
   list(
     query: FileListParams | null | undefined = {},
     options?: RequestOptions,
-  ): APIPromise<FileListResponse> {
+  ): APIPromise<APIResponseFileList> {
     return this._client.get('/files', { query, ...options });
   }
 
@@ -56,10 +56,7 @@ export class Files extends APIResource {
    * - Each file includes metadata and parsed content (for documents)
    * - Failed retrievals include error messages
    */
-  batchRetrieve(
-    body: FileBatchRetrieveParams,
-    options?: RequestOptions,
-  ): APIPromise<FileBatchRetrieveResponse> {
+  batchGet(body: FileBatchGetParams, options?: RequestOptions): APIPromise<APIResponseBatchGetFiles> {
     return this._client.post('/files/queries', { body, ...options });
   }
 
@@ -72,7 +69,7 @@ export class Files extends APIResource {
    * - Supports automatic deduplication
    * - Maximum file size per file: 100MB
    */
-  batchUpload(body: FileBatchUploadParams, options?: RequestOptions): APIPromise<FileBatchUploadResponse> {
+  batchUpload(body: FileBatchUploadParams, options?: RequestOptions): APIPromise<APIResponseBatchFileUpload> {
     return this._client.post(
       '/files/batches',
       multipartFormRequestOptions({ body, ...options }, this._client),
@@ -87,11 +84,11 @@ export class Files extends APIResource {
    * - Useful for downloading or previewing files
    * - Default expiration: 1 hour (3600 seconds)
    */
-  generatePresignedURL(
+  getPresignedURL(
     id: string,
-    query: FileGeneratePresignedURLParams | null | undefined = {},
+    query: FileGetPresignedURLParams | null | undefined = {},
     options?: RequestOptions,
-  ): APIPromise<FileGeneratePresignedURLResponse> {
+  ): APIPromise<APIResponseFileURL> {
     return this._client.get(path`/files/${id}/url`, { query, ...options });
   }
 
@@ -108,7 +105,7 @@ export class Files extends APIResource {
     id: string,
     params: FileParseContentParams | null | undefined = {},
     options?: RequestOptions,
-  ): APIPromise<FileParseContentResponse> {
+  ): APIPromise<APIResponseFileParse> {
     const { skipExist } = params ?? {};
     return this._client.post(path`/files/${id}/parses`, { query: { skipExist }, ...options });
   }
@@ -126,8 +123,78 @@ export class Files extends APIResource {
   }
 }
 
+export interface APIResponseBatchFileUpload extends UsersAPI.APIResponseBase {
+  data?: BatchFileUpload;
+}
+
+export interface APIResponseBatchGetFiles extends UsersAPI.APIResponseBase {
+  data?: BatchGetFiles;
+}
+
 export interface APIResponseFileDetail extends UsersAPI.APIResponseBase {
   data?: FileDetail;
+}
+
+export interface APIResponseFileList extends UsersAPI.APIResponseBase {
+  data?: APIResponseFileList.Data;
+}
+
+export namespace APIResponseFileList {
+  export interface Data {
+    files: Array<FilesAPI.File>;
+
+    total: number;
+  }
+}
+
+export interface APIResponseFileParse extends UsersAPI.APIResponseBase {
+  data?: FileParse;
+}
+
+export interface APIResponseFileURL extends UsersAPI.APIResponseBase {
+  data?: FileURL;
+}
+
+export interface BatchFileUpload {
+  failed?: Array<BatchFileUpload.Failed>;
+
+  successful?: Array<FileDetail>;
+
+  summary?: BatchFileUpload.Summary;
+}
+
+export namespace BatchFileUpload {
+  export interface Failed {
+    error: string;
+
+    name: string;
+  }
+
+  export interface Summary {
+    failed: number;
+
+    successful: number;
+
+    total: number;
+  }
+}
+
+export interface BatchGetFiles {
+  failed: Array<BatchGetFiles.Failed>;
+
+  files: Array<FileDetail>;
+
+  success: number;
+
+  total: number;
+}
+
+export namespace BatchGetFiles {
+  export interface Failed {
+    error: string;
+
+    fileId: string;
+  }
 }
 
 export interface File {
@@ -190,92 +257,16 @@ export namespace FileParse {
   }
 }
 
-export interface FileListResponse extends UsersAPI.APIResponseBase {
-  data?: FileListResponse.Data;
-}
+export interface FileURL {
+  expiresAt: string;
 
-export namespace FileListResponse {
-  export interface Data {
-    files: Array<FilesAPI.File>;
+  expiresIn: number;
 
-    total: number;
-  }
-}
+  fileId: string;
 
-export interface FileBatchRetrieveResponse extends UsersAPI.APIResponseBase {
-  data?: FileBatchRetrieveResponse.Data;
-}
+  name: string;
 
-export namespace FileBatchRetrieveResponse {
-  export interface Data {
-    failed: Array<Data.Failed>;
-
-    files: Array<FilesAPI.FileDetail>;
-
-    success: number;
-
-    total: number;
-  }
-
-  export namespace Data {
-    export interface Failed {
-      error: string;
-
-      fileId: string;
-    }
-  }
-}
-
-export interface FileBatchUploadResponse extends UsersAPI.APIResponseBase {
-  data?: FileBatchUploadResponse.Data;
-}
-
-export namespace FileBatchUploadResponse {
-  export interface Data {
-    failed?: Array<Data.Failed>;
-
-    successful?: Array<FilesAPI.FileDetail>;
-
-    summary?: Data.Summary;
-  }
-
-  export namespace Data {
-    export interface Failed {
-      error: string;
-
-      name: string;
-    }
-
-    export interface Summary {
-      failed: number;
-
-      successful: number;
-
-      total: number;
-    }
-  }
-}
-
-export interface FileGeneratePresignedURLResponse extends UsersAPI.APIResponseBase {
-  data?: FileGeneratePresignedURLResponse.Data;
-}
-
-export namespace FileGeneratePresignedURLResponse {
-  export interface Data {
-    expiresAt: string;
-
-    expiresIn: number;
-
-    fileId: string;
-
-    name: string;
-
-    url: string;
-  }
-}
-
-export interface FileParseContentResponse extends UsersAPI.APIResponseBase {
-  data?: FileParse;
+  url: string;
 }
 
 export interface FileListParams {
@@ -305,7 +296,7 @@ export interface FileListParams {
   userId?: string;
 }
 
-export interface FileBatchRetrieveParams {
+export interface FileBatchGetParams {
   /**
    * Array of file IDs to retrieve (required, at least 1)
    */
@@ -339,7 +330,7 @@ export interface FileBatchUploadParams {
   skipCheckFileType?: boolean | null;
 }
 
-export interface FileGeneratePresignedURLParams {
+export interface FileGetPresignedURLParams {
   /**
    * URL expiration time in seconds (default 3600)
    */
@@ -382,19 +373,22 @@ export interface FileUploadParams {
 
 export declare namespace Files {
   export {
+    type APIResponseBatchFileUpload as APIResponseBatchFileUpload,
+    type APIResponseBatchGetFiles as APIResponseBatchGetFiles,
     type APIResponseFileDetail as APIResponseFileDetail,
+    type APIResponseFileList as APIResponseFileList,
+    type APIResponseFileParse as APIResponseFileParse,
+    type APIResponseFileURL as APIResponseFileURL,
+    type BatchFileUpload as BatchFileUpload,
+    type BatchGetFiles as BatchGetFiles,
     type File as File,
     type FileDetail as FileDetail,
     type FileParse as FileParse,
-    type FileListResponse as FileListResponse,
-    type FileBatchRetrieveResponse as FileBatchRetrieveResponse,
-    type FileBatchUploadResponse as FileBatchUploadResponse,
-    type FileGeneratePresignedURLResponse as FileGeneratePresignedURLResponse,
-    type FileParseContentResponse as FileParseContentResponse,
+    type FileURL as FileURL,
     type FileListParams as FileListParams,
-    type FileBatchRetrieveParams as FileBatchRetrieveParams,
+    type FileBatchGetParams as FileBatchGetParams,
     type FileBatchUploadParams as FileBatchUploadParams,
-    type FileGeneratePresignedURLParams as FileGeneratePresignedURLParams,
+    type FileGetPresignedURLParams as FileGetPresignedURLParams,
     type FileParseContentParams as FileParseContentParams,
     type FileUploadParams as FileUploadParams,
   };

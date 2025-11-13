@@ -26,8 +26,8 @@ Types:
 
 Methods:
 
-- <code title="get /users/{id}/roles">client.users.roles.<a href="./src/resources/users/roles.ts">retrieve</a>(id) -> APIResponseUserRoles</code>
 - <code title="patch /users/{id}/roles">client.users.roles.<a href="./src/resources/users/roles.ts">update</a>(id, { ...params }) -> APIResponseUserRoles</code>
+- <code title="get /users/{id}/roles">client.users.roles.<a href="./src/resources/users/roles.ts">list</a>(id) -> APIResponseUserRoles</code>
 - <code title="delete /users/{id}/roles">client.users.roles.<a href="./src/resources/users/roles.ts">clear</a>(id) -> RoleClearResponse</code>
 
 # Agents
@@ -51,25 +51,28 @@ Methods:
 
 Types:
 
+- <code><a href="./src/resources/files.ts">APIResponseBatchFileUpload</a></code>
+- <code><a href="./src/resources/files.ts">APIResponseBatchGetFiles</a></code>
 - <code><a href="./src/resources/files.ts">APIResponseFileDetail</a></code>
+- <code><a href="./src/resources/files.ts">APIResponseFileList</a></code>
+- <code><a href="./src/resources/files.ts">APIResponseFileParse</a></code>
+- <code><a href="./src/resources/files.ts">APIResponseFileURL</a></code>
+- <code><a href="./src/resources/files.ts">BatchFileUpload</a></code>
+- <code><a href="./src/resources/files.ts">BatchGetFiles</a></code>
 - <code><a href="./src/resources/files.ts">File</a></code>
 - <code><a href="./src/resources/files.ts">FileDetail</a></code>
 - <code><a href="./src/resources/files.ts">FileParse</a></code>
-- <code><a href="./src/resources/files.ts">FileListResponse</a></code>
-- <code><a href="./src/resources/files.ts">FileBatchRetrieveResponse</a></code>
-- <code><a href="./src/resources/files.ts">FileBatchUploadResponse</a></code>
-- <code><a href="./src/resources/files.ts">FileGeneratePresignedURLResponse</a></code>
-- <code><a href="./src/resources/files.ts">FileParseContentResponse</a></code>
+- <code><a href="./src/resources/files.ts">FileURL</a></code>
 
 Methods:
 
 - <code title="get /files/{id}">client.files.<a href="./src/resources/files.ts">retrieve</a>(id) -> APIResponseFileDetail</code>
-- <code title="get /files">client.files.<a href="./src/resources/files.ts">list</a>({ ...params }) -> FileListResponse</code>
+- <code title="get /files">client.files.<a href="./src/resources/files.ts">list</a>({ ...params }) -> APIResponseFileList</code>
 - <code title="delete /files/{id}">client.files.<a href="./src/resources/files.ts">delete</a>(id) -> APIResponseVoid</code>
-- <code title="post /files/queries">client.files.<a href="./src/resources/files.ts">batchRetrieve</a>({ ...params }) -> FileBatchRetrieveResponse</code>
-- <code title="post /files/batches">client.files.<a href="./src/resources/files.ts">batchUpload</a>({ ...params }) -> FileBatchUploadResponse</code>
-- <code title="get /files/{id}/url">client.files.<a href="./src/resources/files.ts">generatePresignedURL</a>(id, { ...params }) -> FileGeneratePresignedURLResponse</code>
-- <code title="post /files/{id}/parses">client.files.<a href="./src/resources/files.ts">parseContent</a>(id, { ...params }) -> FileParseContentResponse</code>
+- <code title="post /files/queries">client.files.<a href="./src/resources/files.ts">batchGet</a>({ ...params }) -> APIResponseBatchGetFiles</code>
+- <code title="post /files/batches">client.files.<a href="./src/resources/files.ts">batchUpload</a>({ ...params }) -> APIResponseBatchFileUpload</code>
+- <code title="get /files/{id}/url">client.files.<a href="./src/resources/files.ts">getPresignedURL</a>(id, { ...params }) -> APIResponseFileURL</code>
+- <code title="post /files/{id}/parses">client.files.<a href="./src/resources/files.ts">parseContent</a>(id, { ...params }) -> APIResponseFileParse</code>
 - <code title="post /files">client.files.<a href="./src/resources/files.ts">upload</a>({ ...params }) -> APIResponseFileDetail</code>
 
 # Messages
@@ -145,7 +148,7 @@ Methods:
 Types:
 
 - <code><a href="./src/resources/providers.ts">APIResponseProvider</a></code>
-- <code><a href="./src/resources/providers.ts">CreateProvider</a></code>
+- <code><a href="./src/resources/providers.ts">CreateProviderRequest</a></code>
 - <code><a href="./src/resources/providers.ts">Provider</a></code>
 - <code><a href="./src/resources/providers.ts">ProviderListResponse</a></code>
 

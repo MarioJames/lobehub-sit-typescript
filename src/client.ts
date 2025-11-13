@@ -27,20 +27,23 @@ import {
   CreateAgent,
 } from './resources/agents';
 import {
+  APIResponseBatchFileUpload,
+  APIResponseBatchGetFiles,
   APIResponseFileDetail,
+  APIResponseFileList,
+  APIResponseFileParse,
+  APIResponseFileURL,
+  BatchFileUpload,
+  BatchGetFiles,
   File,
-  FileBatchRetrieveParams,
-  FileBatchRetrieveResponse,
+  FileBatchGetParams,
   FileBatchUploadParams,
-  FileBatchUploadResponse,
   FileDetail,
-  FileGeneratePresignedURLParams,
-  FileGeneratePresignedURLResponse,
+  FileGetPresignedURLParams,
   FileListParams,
-  FileListResponse,
   FileParse,
   FileParseContentParams,
-  FileParseContentResponse,
+  FileURL,
   FileUploadParams,
   Files,
 } from './resources/files';
@@ -88,7 +91,7 @@ import {
 } from './resources/permissions';
 import {
   APIResponseProvider,
-  CreateProvider,
+  CreateProviderRequest,
   Provider,
   ProviderCreateParams,
   ProviderListParams,
@@ -162,7 +165,7 @@ import { isEmptyObj } from './internal/utils/values';
 
 export interface ClientOptions {
   /**
-   * Defaults to process.env['LOBEHUB_SIT_API_KEY'].
+   * Defaults to process.env['LOBEHUB_API_KEY'].
    */
   apiKey?: string | undefined;
 
@@ -256,7 +259,7 @@ export class LobehubSit {
   /**
    * API Client for interfacing with the Lobehub Sit API.
    *
-   * @param {string | undefined} [opts.apiKey=process.env['LOBEHUB_SIT_API_KEY'] ?? undefined]
+   * @param {string | undefined} [opts.apiKey=process.env['LOBEHUB_API_KEY'] ?? undefined]
    * @param {string} [opts.baseURL=process.env['LOBEHUB_SIT_BASE_URL'] ?? /api/v1] - Override the default base URL for the API.
    * @param {number} [opts.timeout=1 minute] - The maximum amount of time (in milliseconds) the client will wait for a response before timing out.
    * @param {MergedRequestInit} [opts.fetchOptions] - Additional `RequestInit` options to be passed to `fetch` calls.
@@ -267,12 +270,12 @@ export class LobehubSit {
    */
   constructor({
     baseURL = readEnv('LOBEHUB_SIT_BASE_URL'),
-    apiKey = readEnv('LOBEHUB_SIT_API_KEY'),
+    apiKey = readEnv('LOBEHUB_API_KEY'),
     ...opts
   }: ClientOptions = {}) {
     if (apiKey === undefined) {
       throw new Errors.LobehubSitError(
-        "The LOBEHUB_SIT_API_KEY environment variable is missing or empty; either provide it, or instantiate the LobehubSit client with an apiKey option, like new LobehubSit({ apiKey: 'My API Key' }).",
+        "The LOBEHUB_API_KEY environment variable is missing or empty; either provide it, or instantiate the LobehubSit client with an apiKey option, like new LobehubSit({ apiKey: 'My API Key' }).",
       );
     }
 
@@ -899,19 +902,22 @@ export declare namespace LobehubSit {
 
   export {
     Files as Files,
+    type APIResponseBatchFileUpload as APIResponseBatchFileUpload,
+    type APIResponseBatchGetFiles as APIResponseBatchGetFiles,
     type APIResponseFileDetail as APIResponseFileDetail,
+    type APIResponseFileList as APIResponseFileList,
+    type APIResponseFileParse as APIResponseFileParse,
+    type APIResponseFileURL as APIResponseFileURL,
+    type BatchFileUpload as BatchFileUpload,
+    type BatchGetFiles as BatchGetFiles,
     type File as File,
     type FileDetail as FileDetail,
     type FileParse as FileParse,
-    type FileListResponse as FileListResponse,
-    type FileBatchRetrieveResponse as FileBatchRetrieveResponse,
-    type FileBatchUploadResponse as FileBatchUploadResponse,
-    type FileGeneratePresignedURLResponse as FileGeneratePresignedURLResponse,
-    type FileParseContentResponse as FileParseContentResponse,
+    type FileURL as FileURL,
     type FileListParams as FileListParams,
-    type FileBatchRetrieveParams as FileBatchRetrieveParams,
+    type FileBatchGetParams as FileBatchGetParams,
     type FileBatchUploadParams as FileBatchUploadParams,
-    type FileGeneratePresignedURLParams as FileGeneratePresignedURLParams,
+    type FileGetPresignedURLParams as FileGetPresignedURLParams,
     type FileParseContentParams as FileParseContentParams,
     type FileUploadParams as FileUploadParams,
   };
@@ -965,7 +971,7 @@ export declare namespace LobehubSit {
   export {
     Providers as Providers,
     type APIResponseProvider as APIResponseProvider,
-    type CreateProvider as CreateProvider,
+    type CreateProviderRequest as CreateProviderRequest,
     type Provider as Provider,
     type ProviderListResponse as ProviderListResponse,
     type ProviderCreateParams as ProviderCreateParams,
