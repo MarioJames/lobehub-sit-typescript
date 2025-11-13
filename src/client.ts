@@ -383,21 +383,46 @@ export class LobehubSit {
     defaultBaseURL?: string | undefined,
   ): string {
     const baseURL = (!this.#baseURLOverridden() && defaultBaseURL) || this.baseURL;
-    const url =
-      isAbsoluteURL(path) ?
-        new URL(path)
-      : new URL(baseURL + (baseURL.endsWith('/') && path.startsWith('/') ? path.slice(1) : path));
+    const joinPath = (base: string, p: string): string =>
+      base + (base.endsWith('/') && p.startsWith('/') ? p.slice(1) : p);
 
+    // If `path` is absolute, prefer it directly.
+    if (isAbsoluteURL(path)) {
+      const url = new URL(path);
+      const defaultQuery = this.defaultQuery();
+      if (!isEmptyObj(defaultQuery)) {
+        query = { ...defaultQuery, ...query };
+      }
+      if (typeof query === 'object' && query && !Array.isArray(query)) {
+        url.search = this.stringifyQuery(query as Record<string, unknown>);
+      }
+      return url.toString();
+    }
+
+    // If the base is absolute, we can safely use URL API.
+    if (isAbsoluteURL(baseURL)) {
+      const url = new URL(joinPath(baseURL, path));
+      const defaultQuery = this.defaultQuery();
+      if (!isEmptyObj(defaultQuery)) {
+        query = { ...defaultQuery, ...query };
+      }
+      if (typeof query === 'object' && query && !Array.isArray(query)) {
+        url.search = this.stringifyQuery(query as Record<string, unknown>);
+      }
+      return url.toString();
+    }
+
+    // Fallback: baseURL is relative (e.g., '/api/v1'). Build a relative URL string.
+    let urlStr = joinPath(baseURL, path);
     const defaultQuery = this.defaultQuery();
     if (!isEmptyObj(defaultQuery)) {
       query = { ...defaultQuery, ...query };
     }
-
     if (typeof query === 'object' && query && !Array.isArray(query)) {
-      url.search = this.stringifyQuery(query as Record<string, unknown>);
+      const qs = this.stringifyQuery(query as Record<string, unknown>);
+      if (qs) urlStr += (urlStr.includes('?') ? '&' : '?') + qs;
     }
-
-    return url.toString();
+    return urlStr;
   }
 
   /**
