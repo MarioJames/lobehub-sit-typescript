@@ -1,5 +1,5 @@
-import { multipartFormRequestOptions, createForm } from 'lobehub-sit/internal/uploads';
-import { toFile } from 'lobehub-sit/core/uploads';
+import { multipartFormRequestOptions, createForm } from 'lobehub/internal/uploads';
+import { toFile } from 'lobehub/core/uploads';
 
 describe('form data validation', () => {
   test('valid values do not error', async () => {
