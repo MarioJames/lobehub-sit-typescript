@@ -1,6 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import LobehubSit from 'lobehub-sit';
+import LobehubSit from 'lobehub';
 
 const client = new LobehubSit({
   apiKey: 'My API Key',
