@@ -55,12 +55,12 @@ $ cd lobehub-sit-typescript
 # With yarn
 $ yarn link
 $ cd ../my-package
-$ yarn link lobehub
+$ yarn link lobehub-sit
 
 # With pnpm
 $ pnpm link --global
 $ cd ../my-package
-$ pnpm link -—global lobehub
+$ pnpm link -—global lobehub-sit
 ```
 
 ## Running tests
