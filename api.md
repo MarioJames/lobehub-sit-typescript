@@ -53,6 +53,8 @@ Types:
 
 - <code><a href="./src/resources/files.ts">APIResponseBatchFileUpload</a></code>
 - <code><a href="./src/resources/files.ts">APIResponseBatchGetFiles</a></code>
+- <code><a href="./src/resources/files.ts">APIResponseFileChunkStatus</a></code>
+- <code><a href="./src/resources/files.ts">APIResponseFileChunkTask</a></code>
 - <code><a href="./src/resources/files.ts">APIResponseFileDetail</a></code>
 - <code><a href="./src/resources/files.ts">APIResponseFileList</a></code>
 - <code><a href="./src/resources/files.ts">APIResponseFileParse</a></code>
@@ -60,6 +62,8 @@ Types:
 - <code><a href="./src/resources/files.ts">BatchFileUpload</a></code>
 - <code><a href="./src/resources/files.ts">BatchGetFiles</a></code>
 - <code><a href="./src/resources/files.ts">File</a></code>
+- <code><a href="./src/resources/files.ts">FileChunkStatus</a></code>
+- <code><a href="./src/resources/files.ts">FileChunkTask</a></code>
 - <code><a href="./src/resources/files.ts">FileDetail</a></code>
 - <code><a href="./src/resources/files.ts">FileParse</a></code>
 - <code><a href="./src/resources/files.ts">FileURL</a></code>
@@ -71,6 +75,8 @@ Methods:
 - <code title="delete /files/{id}">client.files.<a href="./src/resources/files.ts">delete</a>(id) -> APIResponseVoid</code>
 - <code title="post /files/queries">client.files.<a href="./src/resources/files.ts">batchGet</a>({ ...params }) -> APIResponseBatchGetFiles</code>
 - <code title="post /files/batches">client.files.<a href="./src/resources/files.ts">batchUpload</a>({ ...params }) -> APIResponseBatchFileUpload</code>
+- <code title="get /files/{id}/chunks">client.files.<a href="./src/resources/files.ts">chunkStatus</a>(id) -> APIResponseFileChunkStatus</code>
+- <code title="post /files/{id}/chunks">client.files.<a href="./src/resources/files.ts">createChunkTask</a>(id, { ...params }) -> APIResponseFileChunkTask</code>
 - <code title="get /files/{id}/url">client.files.<a href="./src/resources/files.ts">getPresignedURL</a>(id, { ...params }) -> APIResponseFileURL</code>
 - <code title="post /files/{id}/parses">client.files.<a href="./src/resources/files.ts">parseContent</a>(id, { ...params }) -> APIResponseFileParse</code>
 - <code title="post /files">client.files.<a href="./src/resources/files.ts">upload</a>({ ...params }) -> APIResponseFileDetail</code>
@@ -240,3 +246,35 @@ Methods:
 - <code title="patch /topics/{id}">client.topics.<a href="./src/resources/topics.ts">update</a>(id, { ...params }) -> APIResponseTopic</code>
 - <code title="get /topics">client.topics.<a href="./src/resources/topics.ts">list</a>({ ...params }) -> TopicListResponse</code>
 - <code title="delete /topics/{id}">client.topics.<a href="./src/resources/topics.ts">delete</a>(id) -> APIResponseVoid</code>
+
+# KnowledgeBases
+
+Types:
+
+- <code><a href="./src/resources/knowledge-bases/knowledge-bases.ts">APIResponseFileList</a></code>
+- <code><a href="./src/resources/knowledge-bases/knowledge-bases.ts">APIResponseKnowledgeBase</a></code>
+- <code><a href="./src/resources/knowledge-bases/knowledge-bases.ts">APIResponseKnowledgeBaseDelete</a></code>
+- <code><a href="./src/resources/knowledge-bases/knowledge-bases.ts">APIResponseKnowledgeBaseList</a></code>
+- <code><a href="./src/resources/knowledge-bases/knowledge-bases.ts">CreateKnowledgeBaseRequest</a></code>
+- <code><a href="./src/resources/knowledge-bases/knowledge-bases.ts">File</a></code>
+- <code><a href="./src/resources/knowledge-bases/knowledge-bases.ts">KnowledgeBase</a></code>
+- <code><a href="./src/resources/knowledge-bases/knowledge-bases.ts">UpdateKnowledgeBaseRequest</a></code>
+
+Methods:
+
+- <code title="post /knowledge-bases">client.knowledgeBases.<a href="./src/resources/knowledge-bases/knowledge-bases.ts">create</a>({ ...params }) -> APIResponseKnowledgeBase</code>
+- <code title="get /knowledge-bases/{id}">client.knowledgeBases.<a href="./src/resources/knowledge-bases/knowledge-bases.ts">retrieve</a>(id) -> APIResponseKnowledgeBase</code>
+- <code title="patch /knowledge-bases/{id}">client.knowledgeBases.<a href="./src/resources/knowledge-bases/knowledge-bases.ts">update</a>(id, { ...params }) -> APIResponseKnowledgeBase</code>
+- <code title="get /knowledge-bases">client.knowledgeBases.<a href="./src/resources/knowledge-bases/knowledge-bases.ts">list</a>({ ...params }) -> APIResponseKnowledgeBaseList</code>
+- <code title="delete /knowledge-bases/{id}">client.knowledgeBases.<a href="./src/resources/knowledge-bases/knowledge-bases.ts">delete</a>(id) -> APIResponseKnowledgeBaseDelete</code>
+
+## Files
+
+Types:
+
+- <code><a href="./src/resources/knowledge-bases/files.ts">APIResponseFileList</a></code>
+- <code><a href="./src/resources/knowledge-bases/files.ts">File</a></code>
+
+Methods:
+
+- <code title="get /knowledge-bases/{id}/files">client.knowledgeBases.files.<a href="./src/resources/knowledge-bases/files.ts">list</a>(id, { ...params }) -> APIResponseFileList</code>

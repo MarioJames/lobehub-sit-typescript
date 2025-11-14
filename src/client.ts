@@ -29,6 +29,8 @@ import {
 import {
   APIResponseBatchFileUpload,
   APIResponseBatchGetFiles,
+  APIResponseFileChunkStatus,
+  APIResponseFileChunkTask,
   APIResponseFileDetail,
   APIResponseFileList,
   APIResponseFileParse,
@@ -38,6 +40,9 @@ import {
   File,
   FileBatchGetParams,
   FileBatchUploadParams,
+  FileChunkStatus,
+  FileChunkTask,
+  FileCreateChunkTaskParams,
   FileDetail,
   FileGetPresignedURLParams,
   FileListParams,
@@ -129,6 +134,20 @@ import {
   TopicUpdateParams,
   Topics,
 } from './resources/topics';
+import {
+  APIResponseFileList as KnowledgeBasesAPIAPIResponseFileList,
+  APIResponseKnowledgeBase,
+  APIResponseKnowledgeBaseDelete,
+  APIResponseKnowledgeBaseList,
+  CreateKnowledgeBaseRequest,
+  File as KnowledgeBasesAPIFile,
+  KnowledgeBase,
+  KnowledgeBaseCreateParams,
+  KnowledgeBaseListParams,
+  KnowledgeBaseUpdateParams,
+  KnowledgeBases,
+  UpdateKnowledgeBaseRequest,
+} from './resources/knowledge-bases/knowledge-bases';
 import {
   APIResponseRole,
   CreateRoleRequest,
@@ -884,6 +903,7 @@ export class LobehubSit {
   sessionGroups: API.SessionGroups = new API.SessionGroups(this);
   sessions: API.Sessions = new API.Sessions(this);
   topics: API.Topics = new API.Topics(this);
+  knowledgeBases: API.KnowledgeBases = new API.KnowledgeBases(this);
 }
 
 LobehubSit.Users = Users;
@@ -898,6 +918,7 @@ LobehubSit.Roles = Roles;
 LobehubSit.SessionGroups = SessionGroups;
 LobehubSit.Sessions = Sessions;
 LobehubSit.Topics = Topics;
+LobehubSit.KnowledgeBases = KnowledgeBases;
 
 export declare namespace LobehubSit {
   export type RequestOptions = Opts.RequestOptions;
@@ -929,6 +950,8 @@ export declare namespace LobehubSit {
     Files as Files,
     type APIResponseBatchFileUpload as APIResponseBatchFileUpload,
     type APIResponseBatchGetFiles as APIResponseBatchGetFiles,
+    type APIResponseFileChunkStatus as APIResponseFileChunkStatus,
+    type APIResponseFileChunkTask as APIResponseFileChunkTask,
     type APIResponseFileDetail as APIResponseFileDetail,
     type APIResponseFileList as APIResponseFileList,
     type APIResponseFileParse as APIResponseFileParse,
@@ -936,12 +959,15 @@ export declare namespace LobehubSit {
     type BatchFileUpload as BatchFileUpload,
     type BatchGetFiles as BatchGetFiles,
     type File as File,
+    type FileChunkStatus as FileChunkStatus,
+    type FileChunkTask as FileChunkTask,
     type FileDetail as FileDetail,
     type FileParse as FileParse,
     type FileURL as FileURL,
     type FileListParams as FileListParams,
     type FileBatchGetParams as FileBatchGetParams,
     type FileBatchUploadParams as FileBatchUploadParams,
+    type FileCreateChunkTaskParams as FileCreateChunkTaskParams,
     type FileGetPresignedURLParams as FileGetPresignedURLParams,
     type FileParseContentParams as FileParseContentParams,
     type FileUploadParams as FileUploadParams,
@@ -1046,5 +1072,20 @@ export declare namespace LobehubSit {
     type TopicCreateParams as TopicCreateParams,
     type TopicUpdateParams as TopicUpdateParams,
     type TopicListParams as TopicListParams,
+  };
+
+  export {
+    KnowledgeBases as KnowledgeBases,
+    type KnowledgeBasesAPIAPIResponseFileList as APIResponseFileList,
+    type APIResponseKnowledgeBase as APIResponseKnowledgeBase,
+    type APIResponseKnowledgeBaseDelete as APIResponseKnowledgeBaseDelete,
+    type APIResponseKnowledgeBaseList as APIResponseKnowledgeBaseList,
+    type CreateKnowledgeBaseRequest as CreateKnowledgeBaseRequest,
+    type KnowledgeBasesAPIFile as File,
+    type KnowledgeBase as KnowledgeBase,
+    type UpdateKnowledgeBaseRequest as UpdateKnowledgeBaseRequest,
+    type KnowledgeBaseCreateParams as KnowledgeBaseCreateParams,
+    type KnowledgeBaseUpdateParams as KnowledgeBaseUpdateParams,
+    type KnowledgeBaseListParams as KnowledgeBaseListParams,
   };
 }

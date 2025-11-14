@@ -98,6 +98,30 @@ describe('resource files', () => {
   });
 
   // Prism tests are disabled
+  test.skip('chunkStatus', async () => {
+    const responsePromise = client.files.chunkStatus('id');
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  // Prism tests are disabled
+  test.skip('createChunkTask', async () => {
+    const responsePromise = client.files.createChunkTask('id', {});
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  // Prism tests are disabled
   test.skip('getPresignedURL', async () => {
     const responsePromise = client.files.getPresignedURL('id');
     const rawResponse = await responsePromise.asResponse();
