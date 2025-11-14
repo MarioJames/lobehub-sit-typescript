@@ -7,10 +7,10 @@ const client = new LobehubSit({
   baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
 });
 
-describe('resource providers', () => {
+describe('resource knowledgeBases', () => {
   // Prism tests are disabled
   test.skip('create: only required params', async () => {
-    const responsePromise = client.providers.create({ id: 'id' });
+    const responsePromise = client.knowledgeBases.create({ name: 'x' });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -22,25 +22,19 @@ describe('resource providers', () => {
 
   // Prism tests are disabled
   test.skip('create: required and optional params', async () => {
-    const response = await client.providers.create({
-      id: 'id',
-      checkModel: 'checkModel',
-      config: { foo: 'bar' },
+    const response = await client.knowledgeBases.create({
+      name: 'x',
+      avatar: 'https://example.com',
       description: 'description',
-      enabled: true,
-      fetchOnClient: true,
-      keyVaults: { foo: 'string' },
-      logo: 'logo',
-      name: 'name',
+      isPublic: true,
       settings: { foo: 'bar' },
-      sort: 0,
-      source: 'builtin',
+      type: 'personal',
     });
   });
 
   // Prism tests are disabled
   test.skip('retrieve', async () => {
-    const responsePromise = client.providers.retrieve('id');
+    const responsePromise = client.knowledgeBases.retrieve('id');
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -51,8 +45,8 @@ describe('resource providers', () => {
   });
 
   // Prism tests are disabled
-  test.skip('update: only required params', async () => {
-    const responsePromise = client.providers.update('id', { body_id: 'id' });
+  test.skip('update', async () => {
+    const responsePromise = client.knowledgeBases.update('id', {});
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -60,29 +54,11 @@ describe('resource providers', () => {
     const dataAndResponse = await responsePromise.withResponse();
     expect(dataAndResponse.data).toBe(response);
     expect(dataAndResponse.response).toBe(rawResponse);
-  });
-
-  // Prism tests are disabled
-  test.skip('update: required and optional params', async () => {
-    const response = await client.providers.update('id', {
-      body_id: 'id',
-      checkModel: 'checkModel',
-      config: { foo: 'bar' },
-      description: 'description',
-      enabled: true,
-      fetchOnClient: true,
-      keyVaults: { foo: 'string' },
-      logo: 'logo',
-      name: 'name',
-      settings: { foo: 'bar' },
-      sort: 0,
-      source: 'builtin',
-    });
   });
 
   // Prism tests are disabled
   test.skip('list', async () => {
-    const responsePromise = client.providers.list();
+    const responsePromise = client.knowledgeBases.list();
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -96,8 +72,8 @@ describe('resource providers', () => {
   test.skip('list: request options and params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
-      client.providers.list(
-        { enabled: true, keyword: 'keyword', page: 1, pageSize: 1 },
+      client.knowledgeBases.list(
+        { enabled: true, keyword: 'keyword', page: 1, pageSize: 1, type: 'personal' },
         { path: '/_stainless_unknown_path' },
       ),
     ).rejects.toThrow(LobehubSit.NotFoundError);
@@ -105,7 +81,7 @@ describe('resource providers', () => {
 
   // Prism tests are disabled
   test.skip('delete', async () => {
-    const responsePromise = client.providers.delete('id');
+    const responsePromise = client.knowledgeBases.delete('id');
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
