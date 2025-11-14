@@ -276,6 +276,11 @@ export interface FileListParams {
   fileType?: string;
 
   /**
+   * Search keyword for file name (case-insensitive)
+   */
+  keyword?: string;
+
+  /**
    * Page number (default 1)
    */
   page?: number;
@@ -284,11 +289,6 @@ export interface FileListParams {
    * Items per page (default 20, max 100)
    */
   pageSize?: number;
-
-  /**
-   * Search keyword for file name (case-insensitive)
-   */
-  search?: string;
 
   /**
    * Filter by user ID (requires appropriate permission)
