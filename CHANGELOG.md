@@ -1,5 +1,13 @@
 # Changelog
 
+## 1.2.1 (2025-11-15)
+
+Full Changelog: [v1.2.0...v1.2.1](https://github.com/MarioJames/lobehub-sit-typescript/compare/v1.2.0...v1.2.1)
+
+### Chores
+
+* update SDK settings ([0b5950b](https://github.com/MarioJames/lobehub-sit-typescript/commit/0b5950b55182b9dbe727cfd6282666cc81dd80ed))
+
 ## 1.2.0 (2025-11-15)
 
 Full Changelog: [v1.1.0...v1.2.0](https://github.com/MarioJames/lobehub-sit-typescript/compare/v1.1.0...v1.2.0)
