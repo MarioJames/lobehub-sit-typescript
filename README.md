@@ -11,8 +11,11 @@ It is generated with [Stainless](https://www.stainless.com/).
 ## Installation
 
 ```sh
-npm install lobehub-sit
+npm install git+ssh://git@github.com:MarioJames/lobehub-sit-typescript.git
 ```
+
+> [!NOTE]
+> Once this package is [published to npm](https://www.stainless.com/docs/guides/publish), this will become: `npm install lobehub-sit`
 
 ## Usage
 
