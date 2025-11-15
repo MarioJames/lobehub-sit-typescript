@@ -135,12 +135,12 @@ import {
   Topics,
 } from './resources/topics';
 import {
-  APIResponseFileList as KnowledgeBasesAPIAPIResponseFileList,
   APIResponseKnowledgeBase,
   APIResponseKnowledgeBaseDelete,
   APIResponseKnowledgeBaseList,
   CreateKnowledgeBaseRequest,
-  File as KnowledgeBasesAPIFile,
+  KBAPIResponseFileList,
+  KBFile,
   KnowledgeBase,
   KnowledgeBaseCreateParams,
   KnowledgeBaseListParams,
@@ -1051,12 +1051,12 @@ export declare namespace LobehubSit {
 
   export {
     KnowledgeBases as KnowledgeBases,
-    type KnowledgeBasesAPIAPIResponseFileList as APIResponseFileList,
     type APIResponseKnowledgeBase as APIResponseKnowledgeBase,
     type APIResponseKnowledgeBaseDelete as APIResponseKnowledgeBaseDelete,
     type APIResponseKnowledgeBaseList as APIResponseKnowledgeBaseList,
     type CreateKnowledgeBaseRequest as CreateKnowledgeBaseRequest,
-    type KnowledgeBasesAPIFile as File,
+    type KBAPIResponseFileList as KBAPIResponseFileList,
+    type KBFile as KBFile,
     type KnowledgeBase as KnowledgeBase,
     type UpdateKnowledgeBaseRequest as UpdateKnowledgeBaseRequest,
     type KnowledgeBaseCreateParams as KnowledgeBaseCreateParams,
