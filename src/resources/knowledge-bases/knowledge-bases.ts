@@ -159,6 +159,8 @@ export interface KBFile {
 
   knowledgeBaseId?: string | null;
 
+  knowledgeBases?: Array<KBFile.KnowledgeBase> | null;
+
   metadata?: { [key: string]: unknown } | null;
 
   name?: string | null;
@@ -195,6 +197,16 @@ export namespace KBFile {
     export interface Body {
       detail: string;
     }
+  }
+
+  export interface KnowledgeBase {
+    id: string;
+
+    name: string;
+
+    avatar?: string | null;
+
+    description?: string | null;
   }
 }
 
