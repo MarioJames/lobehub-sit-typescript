@@ -2,7 +2,8 @@
 
 import { APIResource } from '../../core/resource';
 import * as KnowledgeBasesAPI from './knowledge-bases';
-import * as FilesAPI from './files';
+import * as FilesAPI from '../files';
+import * as KnowledgeBasesFilesAPI from './files';
 import { FileListParams, Files } from './files';
 import * as UsersAPI from '../users/users';
 import { APIPromise } from '../../core/api-promise';
@@ -10,7 +11,7 @@ import { RequestOptions } from '../../internal/request-options';
 import { path } from '../../internal/utils/path';
 
 export class KnowledgeBases extends APIResource {
-  files: FilesAPI.Files = new FilesAPI.Files(this._client);
+  files: KnowledgeBasesFilesAPI.Files = new KnowledgeBasesFilesAPI.Files(this._client);
 
   /**
    * Create a new knowledge base with specified properties.
@@ -75,18 +76,6 @@ export class KnowledgeBases extends APIResource {
   }
 }
 
-export interface APIResponseFileList extends UsersAPI.APIResponseBase {
-  data?: APIResponseFileList.Data;
-}
-
-export namespace APIResponseFileList {
-  export interface Data {
-    files: Array<FilesAPI.File>;
-
-    total: number;
-  }
-}
-
 export interface APIResponseKnowledgeBase extends UsersAPI.APIResponseBase {
   data?: APIResponseKnowledgeBase.Data;
 }
@@ -135,14 +124,38 @@ export interface CreateKnowledgeBaseRequest {
   type?: 'personal' | 'shared' | null;
 }
 
-export interface File {
+export interface KBAPIResponseFileList extends UsersAPI.APIResponseBase {
+  data?: KBAPIResponseFileList.Data;
+}
+
+export namespace KBAPIResponseFileList {
+  export interface Data {
+    files: Array<FilesAPI.File>;
+
+    total: number;
+  }
+}
+
+export interface KBFile {
   id?: string;
 
+  chunkCount?: number | null;
+
+  chunkingError?: KBFile.ChunkingError | null;
+
+  chunkingStatus?: 'pending' | 'processing' | 'success' | 'error' | null;
+
   createdAt?: string | null;
+
+  embeddingError?: KBFile.EmbeddingError | null;
+
+  embeddingStatus?: 'pending' | 'processing' | 'success' | 'error' | null;
 
   fileHash?: string | null;
 
   fileType?: string | null;
+
+  finishEmbedding?: boolean | null;
 
   knowledgeBaseId?: string | null;
 
@@ -159,8 +172,36 @@ export interface File {
   userId?: string | null;
 }
 
+export namespace KBFile {
+  export interface ChunkingError {
+    body: ChunkingError.Body;
+
+    name: string;
+  }
+
+  export namespace ChunkingError {
+    export interface Body {
+      detail: string;
+    }
+  }
+
+  export interface EmbeddingError {
+    body: EmbeddingError.Body;
+
+    name: string;
+  }
+
+  export namespace EmbeddingError {
+    export interface Body {
+      detail: string;
+    }
+  }
+}
+
 export interface KnowledgeBase {
   id: string;
+
+  accessedAt: string;
 
   createdAt: string;
 
@@ -170,7 +211,11 @@ export interface KnowledgeBase {
 
   updatedAt: string;
 
+  userId: string;
+
   avatar?: string | null;
+
+  clientId?: string | null;
 
   description?: string | null;
 
@@ -179,8 +224,6 @@ export interface KnowledgeBase {
   settings?: { [key: string]: unknown } | null;
 
   type?: 'personal' | 'shared' | null;
-
-  userId?: string | null;
 }
 
 export interface UpdateKnowledgeBaseRequest {
@@ -299,12 +342,12 @@ KnowledgeBases.Files = Files;
 
 export declare namespace KnowledgeBases {
   export {
-    type APIResponseFileList as APIResponseFileList,
     type APIResponseKnowledgeBase as APIResponseKnowledgeBase,
     type APIResponseKnowledgeBaseDelete as APIResponseKnowledgeBaseDelete,
     type APIResponseKnowledgeBaseList as APIResponseKnowledgeBaseList,
     type CreateKnowledgeBaseRequest as CreateKnowledgeBaseRequest,
-    type File as File,
+    type KBAPIResponseFileList as KBAPIResponseFileList,
+    type KBFile as KBFile,
     type KnowledgeBase as KnowledgeBase,
     type UpdateKnowledgeBaseRequest as UpdateKnowledgeBaseRequest,
     type KnowledgeBaseCreateParams as KnowledgeBaseCreateParams,

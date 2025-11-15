@@ -251,12 +251,12 @@ Methods:
 
 Types:
 
-- <code><a href="./src/resources/knowledge-bases/knowledge-bases.ts">APIResponseFileList</a></code>
 - <code><a href="./src/resources/knowledge-bases/knowledge-bases.ts">APIResponseKnowledgeBase</a></code>
 - <code><a href="./src/resources/knowledge-bases/knowledge-bases.ts">APIResponseKnowledgeBaseDelete</a></code>
 - <code><a href="./src/resources/knowledge-bases/knowledge-bases.ts">APIResponseKnowledgeBaseList</a></code>
 - <code><a href="./src/resources/knowledge-bases/knowledge-bases.ts">CreateKnowledgeBaseRequest</a></code>
-- <code><a href="./src/resources/knowledge-bases/knowledge-bases.ts">File</a></code>
+- <code><a href="./src/resources/knowledge-bases/knowledge-bases.ts">KBAPIResponseFileList</a></code>
+- <code><a href="./src/resources/knowledge-bases/knowledge-bases.ts">KBFile</a></code>
 - <code><a href="./src/resources/knowledge-bases/knowledge-bases.ts">KnowledgeBase</a></code>
 - <code><a href="./src/resources/knowledge-bases/knowledge-bases.ts">UpdateKnowledgeBaseRequest</a></code>
 
@@ -272,8 +272,8 @@ Methods:
 
 Types:
 
-- <code><a href="./src/resources/knowledge-bases/files.ts">APIResponseFileList</a></code>
-- <code><a href="./src/resources/knowledge-bases/files.ts">File</a></code>
+- <code><a href="./src/resources/knowledge-bases/files.ts">KBAPIResponseFileList</a></code>
+- <code><a href="./src/resources/knowledge-bases/files.ts">KBFile</a></code>
 
 Methods:
 

@@ -1,7 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../core/resource';
-import * as KnowledgeBasesFilesAPI from './knowledge-bases/files';
+import * as FilesAPI from './files';
 import * as UsersAPI from './users/users';
 import { APIPromise } from '../core/api-promise';
 import { type Uploadable } from '../core/uploads';
@@ -32,7 +32,7 @@ export class Files extends APIResource {
   list(
     query: FileListParams | null | undefined = {},
     options?: RequestOptions,
-  ): APIPromise<KnowledgeBasesFilesAPI.APIResponseFileList> {
+  ): APIPromise<APIResponseFileList> {
     return this._client.get('/files', { query, ...options });
   }
 
@@ -176,7 +176,7 @@ export interface APIResponseFileList extends UsersAPI.APIResponseBase {
 
 export namespace APIResponseFileList {
   export interface Data {
-    files: Array<KnowledgeBasesFilesAPI.File>;
+    files: Array<FilesAPI.File>;
 
     total: number;
   }
@@ -235,11 +235,23 @@ export namespace BatchGetFiles {
 export interface File {
   id?: string;
 
+  chunkCount?: number | null;
+
+  chunkingError?: File.ChunkingError | null;
+
+  chunkingStatus?: 'pending' | 'processing' | 'success' | 'error' | null;
+
   createdAt?: string | null;
+
+  embeddingError?: File.EmbeddingError | null;
+
+  embeddingStatus?: 'pending' | 'processing' | 'success' | 'error' | null;
 
   fileHash?: string | null;
 
   fileType?: string | null;
+
+  finishEmbedding?: boolean | null;
 
   knowledgeBaseId?: string | null;
 
@@ -254,6 +266,32 @@ export interface File {
   url?: string | null;
 
   userId?: string | null;
+}
+
+export namespace File {
+  export interface ChunkingError {
+    body: ChunkingError.Body;
+
+    name: string;
+  }
+
+  export namespace ChunkingError {
+    export interface Body {
+      detail: string;
+    }
+  }
+
+  export interface EmbeddingError {
+    body: EmbeddingError.Body;
+
+    name: string;
+  }
+
+  export namespace EmbeddingError {
+    export interface Body {
+      detail: string;
+    }
+  }
 }
 
 export interface FileChunkStatus {
@@ -309,7 +347,7 @@ export interface FileChunkTask {
 }
 
 export interface FileDetail {
-  file: KnowledgeBasesFilesAPI.File;
+  file: File;
 
   parsed?: FileParse | null;
 }

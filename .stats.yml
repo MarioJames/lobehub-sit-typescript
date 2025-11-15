@@ -1,4 +1,4 @@
 configured_endpoints: 80
-openapi_spec_url: https://storage.googleapis.com/stainless-sdk-openapi-specs/lobehub-sit%2Flobehub-sit-3193f2ed74bd78f193aa6a64e591f0026377bc9492fe89a7021fccf7a3a14436.yml
-openapi_spec_hash: 33f38f2c74bc2a7c173092ab0bd57a70
-config_hash: 5f86ee3f553fcf0dae39589750cb6d85
+openapi_spec_url: https://storage.googleapis.com/stainless-sdk-openapi-specs/lobehub-sit%2Flobehub-sit-d2f7a3ffb1c1a4a6dee88a0d50c18ab726fff8a5e6c53e2057efc117dd123a98.yml
+openapi_spec_hash: ca15f5d967d6254b21630f7b7197be1d
+config_hash: 69756b0b9006fd4bc43d02fb9608d347
