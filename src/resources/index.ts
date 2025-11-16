@@ -45,6 +45,7 @@ export {
   type KBAPIResponseFileList,
   type KBFile,
   type KnowledgeBase,
+  type KnowledgeBaseListItem,
   type UpdateKnowledgeBaseRequest,
   type KnowledgeBaseCreateParams,
   type KnowledgeBaseUpdateParams,

@@ -258,6 +258,7 @@ Types:
 - <code><a href="./src/resources/knowledge-bases/knowledge-bases.ts">KBAPIResponseFileList</a></code>
 - <code><a href="./src/resources/knowledge-bases/knowledge-bases.ts">KBFile</a></code>
 - <code><a href="./src/resources/knowledge-bases/knowledge-bases.ts">KnowledgeBase</a></code>
+- <code><a href="./src/resources/knowledge-bases/knowledge-bases.ts">KnowledgeBaseListItem</a></code>
 - <code><a href="./src/resources/knowledge-bases/knowledge-bases.ts">UpdateKnowledgeBaseRequest</a></code>
 
 Methods:
