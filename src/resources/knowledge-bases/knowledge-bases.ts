@@ -104,7 +104,7 @@ export interface APIResponseKnowledgeBaseList extends UsersAPI.APIResponseBase {
 
 export namespace APIResponseKnowledgeBaseList {
   export interface Data {
-    knowledgeBases: Array<KnowledgeBasesAPI.KnowledgeBase>;
+    knowledgeBases: Array<KnowledgeBasesAPI.KnowledgeBaseListItem>;
 
     total: number;
   }
@@ -238,6 +238,13 @@ export interface KnowledgeBase {
   type?: 'personal' | 'shared' | null;
 }
 
+export interface KnowledgeBaseListItem extends KnowledgeBase {
+  /**
+   * Whether current user is authorized to access this knowledge base
+   */
+  isAuthorized?: boolean;
+}
+
 export interface UpdateKnowledgeBaseRequest {
   avatar?: string | null;
 
@@ -361,6 +368,7 @@ export declare namespace KnowledgeBases {
     type KBAPIResponseFileList as KBAPIResponseFileList,
     type KBFile as KBFile,
     type KnowledgeBase as KnowledgeBase,
+    type KnowledgeBaseListItem as KnowledgeBaseListItem,
     type UpdateKnowledgeBaseRequest as UpdateKnowledgeBaseRequest,
     type KnowledgeBaseCreateParams as KnowledgeBaseCreateParams,
     type KnowledgeBaseUpdateParams as KnowledgeBaseUpdateParams,
