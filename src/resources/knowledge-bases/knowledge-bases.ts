@@ -240,9 +240,9 @@ export interface KnowledgeBase {
 
 export interface KnowledgeBaseListItem extends KnowledgeBase {
   /**
-   * Whether current user is authorized to access this knowledge base
+   * Access type/source of the current user for this knowledge base
    */
-  isAuthorized?: boolean;
+  accessType?: 'owner' | 'userGrant' | 'roleGrant' | 'public';
 }
 
 export interface UpdateKnowledgeBaseRequest {
