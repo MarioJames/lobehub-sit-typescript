@@ -23,6 +23,17 @@ export class Files extends APIResource {
   }
 
   /**
+   * Update file properties, such as associated knowledge base.
+   *
+   * - Requires FILE_UPDATE permission
+   * - Only the file owner can update the file
+   * - Can associate/disassociate file with knowledge base
+   */
+  update(id: string, body: FileUpdateParams, options?: RequestOptions): APIPromise<APIResponseFileDetail> {
+    return this._client.patch(path`/files/${id}`, { body, ...options });
+  }
+
+  /**
    * Get paginated list of files with optional filtering by file type, search
    * keyword, and user ID.
    *
@@ -437,6 +448,13 @@ export interface FileURL {
   url: string;
 }
 
+export interface FileUpdateParams {
+  /**
+   * Knowledge base ID to associate with (null to disassociate)
+   */
+  knowledgeBaseId?: string | null;
+}
+
 export interface FileListParams {
   /**
    * Filter by file type (e.g., 'image/', 'application/pdf')
@@ -569,6 +587,7 @@ export declare namespace Files {
     type FileDetail as FileDetail,
     type FileParse as FileParse,
     type FileURL as FileURL,
+    type FileUpdateParams as FileUpdateParams,
     type FileListParams as FileListParams,
     type FileBatchGetParams as FileBatchGetParams,
     type FileBatchUploadParams as FileBatchUploadParams,
