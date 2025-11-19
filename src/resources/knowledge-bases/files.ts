@@ -33,29 +33,26 @@ export namespace KBAPIResponseFileList {
     files: Array<FilesAPI.File>;
 
     total: number;
+
+    /**
+     * Total size in bytes of all matched files
+     */
+    totalSize?: string;
   }
 }
 
 export interface KBFile {
   id?: string;
 
-  chunkCount?: number | null;
-
-  chunkingError?: KBFile.ChunkingError | null;
-
-  chunkingStatus?: 'pending' | 'processing' | 'success' | 'error' | null;
+  chunking?: KBFile.Chunking | null;
 
   createdAt?: string | null;
 
-  embeddingError?: KBFile.EmbeddingError | null;
-
-  embeddingStatus?: 'pending' | 'processing' | 'success' | 'error' | null;
+  embedding?: KBFile.Embedding | null;
 
   fileHash?: string | null;
 
   fileType?: string | null;
-
-  finishEmbedding?: boolean | null;
 
   knowledgeBaseId?: string | null;
 
@@ -75,27 +72,61 @@ export interface KBFile {
 }
 
 export namespace KBFile {
-  export interface ChunkingError {
-    body: ChunkingError.Body;
+  export interface Chunking {
+    id?: string | null;
 
-    name: string;
+    /**
+     * Chunk count for the related file (only for chunking tasks)
+     */
+    count?: number | null;
+
+    error?: Chunking.Error | null;
+
+    status?: 'pending' | 'processing' | 'success' | 'error' | null;
+
+    type?: 'chunk' | 'embedding' | 'image_generation' | null;
   }
 
-  export namespace ChunkingError {
-    export interface Body {
-      detail: string;
+  export namespace Chunking {
+    export interface Error {
+      body: Error.Body;
+
+      name: string;
+    }
+
+    export namespace Error {
+      export interface Body {
+        detail: string;
+      }
     }
   }
 
-  export interface EmbeddingError {
-    body: EmbeddingError.Body;
+  export interface Embedding {
+    id?: string | null;
 
-    name: string;
+    /**
+     * Chunk count for the related file (only for chunking tasks)
+     */
+    count?: number | null;
+
+    error?: Embedding.Error | null;
+
+    status?: 'pending' | 'processing' | 'success' | 'error' | null;
+
+    type?: 'chunk' | 'embedding' | 'image_generation' | null;
   }
 
-  export namespace EmbeddingError {
-    export interface Body {
-      detail: string;
+  export namespace Embedding {
+    export interface Error {
+      body: Error.Body;
+
+      name: string;
+    }
+
+    export namespace Error {
+      export interface Body {
+        detail: string;
+      }
     }
   }
 
@@ -112,7 +143,7 @@ export namespace KBFile {
 
 export interface FileListParams {
   /**
-   * Filter by file type (e.g., "image/", "application/pdf")
+   * Filter by file type (e.g., 'image/', 'application/pdf')
    */
   fileType?: string;
 

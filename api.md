@@ -71,6 +71,7 @@ Types:
 Methods:
 
 - <code title="get /files/{id}">client.files.<a href="./src/resources/files.ts">retrieve</a>(id) -> APIResponseFileDetail</code>
+- <code title="patch /files/{id}">client.files.<a href="./src/resources/files.ts">update</a>(id, { ...params }) -> APIResponseFileDetail</code>
 - <code title="get /files">client.files.<a href="./src/resources/files.ts">list</a>({ ...params }) -> APIResponseFileList</code>
 - <code title="delete /files/{id}">client.files.<a href="./src/resources/files.ts">delete</a>(id) -> APIResponseVoid</code>
 - <code title="post /files/queries">client.files.<a href="./src/resources/files.ts">batchGet</a>({ ...params }) -> APIResponseBatchGetFiles</code>

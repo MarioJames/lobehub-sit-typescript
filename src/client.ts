@@ -49,6 +49,7 @@ import {
   FileParse,
   FileParseContentParams,
   FileURL,
+  FileUpdateParams,
   FileUploadParams,
   Files,
 } from './resources/files';
@@ -965,6 +966,7 @@ export declare namespace LobehubSit {
     type FileDetail as FileDetail,
     type FileParse as FileParse,
     type FileURL as FileURL,
+    type FileUpdateParams as FileUpdateParams,
     type FileListParams as FileListParams,
     type FileBatchGetParams as FileBatchGetParams,
     type FileBatchUploadParams as FileBatchUploadParams,

@@ -28,6 +28,7 @@ export {
   type FileDetail,
   type FileParse,
   type FileURL,
+  type FileUpdateParams,
   type FileListParams,
   type FileBatchGetParams,
   type FileBatchUploadParams,

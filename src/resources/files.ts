@@ -23,6 +23,17 @@ export class Files extends APIResource {
   }
 
   /**
+   * Update file properties, such as associated knowledge base.
+   *
+   * - Requires FILE_UPDATE permission
+   * - Only the file owner can update the file
+   * - Can associate/disassociate file with knowledge base
+   */
+  update(id: string, body: FileUpdateParams, options?: RequestOptions): APIPromise<APIResponseFileDetail> {
+    return this._client.patch(path`/files/${id}`, { body, ...options });
+  }
+
+  /**
    * Get paginated list of files with optional filtering by file type, search
    * keyword, and user ID.
    *
@@ -179,6 +190,11 @@ export namespace APIResponseFileList {
     files: Array<FilesAPI.File>;
 
     total: number;
+
+    /**
+     * Total size in bytes of all matched files
+     */
+    totalSize?: string;
   }
 }
 
@@ -235,23 +251,15 @@ export namespace BatchGetFiles {
 export interface File {
   id?: string;
 
-  chunkCount?: number | null;
-
-  chunkingError?: File.ChunkingError | null;
-
-  chunkingStatus?: 'pending' | 'processing' | 'success' | 'error' | null;
+  chunking?: File.Chunking | null;
 
   createdAt?: string | null;
 
-  embeddingError?: File.EmbeddingError | null;
-
-  embeddingStatus?: 'pending' | 'processing' | 'success' | 'error' | null;
+  embedding?: File.Embedding | null;
 
   fileHash?: string | null;
 
   fileType?: string | null;
-
-  finishEmbedding?: boolean | null;
 
   knowledgeBaseId?: string | null;
 
@@ -271,27 +279,61 @@ export interface File {
 }
 
 export namespace File {
-  export interface ChunkingError {
-    body: ChunkingError.Body;
+  export interface Chunking {
+    id?: string | null;
 
-    name: string;
+    /**
+     * Chunk count for the related file (only for chunking tasks)
+     */
+    count?: number | null;
+
+    error?: Chunking.Error | null;
+
+    status?: 'pending' | 'processing' | 'success' | 'error' | null;
+
+    type?: 'chunk' | 'embedding' | 'image_generation' | null;
   }
 
-  export namespace ChunkingError {
-    export interface Body {
-      detail: string;
+  export namespace Chunking {
+    export interface Error {
+      body: Error.Body;
+
+      name: string;
+    }
+
+    export namespace Error {
+      export interface Body {
+        detail: string;
+      }
     }
   }
 
-  export interface EmbeddingError {
-    body: EmbeddingError.Body;
+  export interface Embedding {
+    id?: string | null;
 
-    name: string;
+    /**
+     * Chunk count for the related file (only for chunking tasks)
+     */
+    count?: number | null;
+
+    error?: Embedding.Error | null;
+
+    status?: 'pending' | 'processing' | 'success' | 'error' | null;
+
+    type?: 'chunk' | 'embedding' | 'image_generation' | null;
   }
 
-  export namespace EmbeddingError {
-    export interface Body {
-      detail: string;
+  export namespace Embedding {
+    export interface Error {
+      body: Error.Body;
+
+      name: string;
+    }
+
+    export namespace Error {
+      export interface Body {
+        detail: string;
+      }
     }
   }
 
@@ -406,9 +448,16 @@ export interface FileURL {
   url: string;
 }
 
+export interface FileUpdateParams {
+  /**
+   * Knowledge base ID to associate with (null to disassociate)
+   */
+  knowledgeBaseId?: string | null;
+}
+
 export interface FileListParams {
   /**
-   * Filter by file type (e.g., "image/", "application/pdf")
+   * Filter by file type (e.g., 'image/', 'application/pdf')
    */
   fileType?: string;
 
@@ -447,7 +496,7 @@ export interface FileBatchUploadParams {
   files: Array<Uploadable>;
 
   /**
-   * Custom upload directory for all files (default "uploads")
+   * Custom upload directory for all files (default 'uploads')
    */
   directory?: string | null;
 
@@ -500,7 +549,7 @@ export interface FileUploadParams {
   file: Uploadable;
 
   /**
-   * Custom upload directory (default "uploads")
+   * Custom upload directory (default 'uploads')
    */
   directory?: string | null;
 
@@ -538,6 +587,7 @@ export declare namespace Files {
     type FileDetail as FileDetail,
     type FileParse as FileParse,
     type FileURL as FileURL,
+    type FileUpdateParams as FileUpdateParams,
     type FileListParams as FileListParams,
     type FileBatchGetParams as FileBatchGetParams,
     type FileBatchUploadParams as FileBatchUploadParams,
