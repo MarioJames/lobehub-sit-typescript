@@ -4,7 +4,15 @@ import { APIResource } from '../../core/resource';
 import * as KnowledgeBasesAPI from './knowledge-bases';
 import * as FilesAPI from '../files';
 import * as KnowledgeBasesFilesAPI from './files';
-import { FileListParams, Files } from './files';
+import {
+  FileBatchAddParams,
+  FileBatchRemoveParams,
+  FileListParams,
+  FileMoveParams,
+  Files,
+  KBAPIResponseFileOperation,
+  KBAPIResponseMoveFiles,
+} from './files';
 import * as UsersAPI from '../users/users';
 import { APIPromise } from '../../core/api-promise';
 import { RequestOptions } from '../../internal/request-options';
@@ -98,6 +106,10 @@ export namespace APIResponseKnowledgeBaseDelete {
   }
 }
 
+export interface APIResponseKnowledgeBaseFileOperation extends UsersAPI.APIResponseBase {
+  data: KnowledgeBaseFileOperationResult;
+}
+
 export interface APIResponseKnowledgeBaseList extends UsersAPI.APIResponseBase {
   data?: APIResponseKnowledgeBaseList.Data;
 }
@@ -108,6 +120,10 @@ export namespace APIResponseKnowledgeBaseList {
 
     total: number;
   }
+}
+
+export interface APIResponseMoveKnowledgeBaseFiles extends UsersAPI.APIResponseBase {
+  data: MoveKnowledgeBaseFilesResult;
 }
 
 export interface CreateKnowledgeBaseRequest {
@@ -269,11 +285,39 @@ export interface KnowledgeBase {
   type?: 'personal' | 'shared' | null;
 }
 
+export interface KnowledgeBaseFileOperationResult {
+  failed: Array<KnowledgeBaseFileOperationResult.Failed>;
+
+  successed: Array<string>;
+}
+
+export namespace KnowledgeBaseFileOperationResult {
+  export interface Failed {
+    fileId: string;
+
+    reason: string;
+  }
+}
+
 export interface KnowledgeBaseListItem extends KnowledgeBase {
   /**
    * Access type/source of the current user for this knowledge base
    */
   accessType?: 'owner' | 'userGrant' | 'roleGrant' | 'public';
+}
+
+export interface MoveKnowledgeBaseFilesResult {
+  failed: Array<MoveKnowledgeBaseFilesResult.Failed>;
+
+  successed: Array<string>;
+}
+
+export namespace MoveKnowledgeBaseFilesResult {
+  export interface Failed {
+    fileId: string;
+
+    reason: string;
+  }
 }
 
 export interface UpdateKnowledgeBaseRequest {
@@ -394,17 +438,29 @@ export declare namespace KnowledgeBases {
   export {
     type APIResponseKnowledgeBase as APIResponseKnowledgeBase,
     type APIResponseKnowledgeBaseDelete as APIResponseKnowledgeBaseDelete,
+    type APIResponseKnowledgeBaseFileOperation as APIResponseKnowledgeBaseFileOperation,
     type APIResponseKnowledgeBaseList as APIResponseKnowledgeBaseList,
+    type APIResponseMoveKnowledgeBaseFiles as APIResponseMoveKnowledgeBaseFiles,
     type CreateKnowledgeBaseRequest as CreateKnowledgeBaseRequest,
     type KBAPIResponseFileList as KBAPIResponseFileList,
     type KBFile as KBFile,
     type KnowledgeBase as KnowledgeBase,
+    type KnowledgeBaseFileOperationResult as KnowledgeBaseFileOperationResult,
     type KnowledgeBaseListItem as KnowledgeBaseListItem,
+    type MoveKnowledgeBaseFilesResult as MoveKnowledgeBaseFilesResult,
     type UpdateKnowledgeBaseRequest as UpdateKnowledgeBaseRequest,
     type KnowledgeBaseCreateParams as KnowledgeBaseCreateParams,
     type KnowledgeBaseUpdateParams as KnowledgeBaseUpdateParams,
     type KnowledgeBaseListParams as KnowledgeBaseListParams,
   };
 
-  export { Files as Files, type FileListParams as FileListParams };
+  export {
+    Files as Files,
+    type KBAPIResponseFileOperation as KBAPIResponseFileOperation,
+    type KBAPIResponseMoveFiles as KBAPIResponseMoveFiles,
+    type FileListParams as FileListParams,
+    type FileBatchAddParams as FileBatchAddParams,
+    type FileBatchRemoveParams as FileBatchRemoveParams,
+    type FileMoveParams as FileMoveParams,
+  };
 }

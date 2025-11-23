@@ -31,4 +31,61 @@ describe('resource files', () => {
       ),
     ).rejects.toThrow(LobehubSit.NotFoundError);
   });
+
+  // Prism tests are disabled
+  test.skip('batchAdd: only required params', async () => {
+    const responsePromise = client.knowledgeBases.files.batchAdd('id', { fileIds: ['string'] });
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  // Prism tests are disabled
+  test.skip('batchAdd: required and optional params', async () => {
+    const response = await client.knowledgeBases.files.batchAdd('id', { fileIds: ['string'] });
+  });
+
+  // Prism tests are disabled
+  test.skip('batchRemove: only required params', async () => {
+    const responsePromise = client.knowledgeBases.files.batchRemove('id', { fileIds: ['string'] });
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  // Prism tests are disabled
+  test.skip('batchRemove: required and optional params', async () => {
+    const response = await client.knowledgeBases.files.batchRemove('id', { fileIds: ['string'] });
+  });
+
+  // Prism tests are disabled
+  test.skip('move: only required params', async () => {
+    const responsePromise = client.knowledgeBases.files.move('id', {
+      fileIds: ['string'],
+      targetKnowledgeBaseId: 'targetKnowledgeBaseId',
+    });
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  // Prism tests are disabled
+  test.skip('move: required and optional params', async () => {
+    const response = await client.knowledgeBases.files.move('id', {
+      fileIds: ['string'],
+      targetKnowledgeBaseId: 'targetKnowledgeBaseId',
+    });
+  });
 });
