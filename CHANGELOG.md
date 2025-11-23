@@ -1,5 +1,19 @@
 # Changelog
 
+## 1.6.0 (2025-11-23)
+
+Full Changelog: [v1.5.0...v1.6.0](https://github.com/MarioJames/lobehub-sit-typescript/compare/v1.5.0...v1.6.0)
+
+### Features
+
+* **api:** update api ([267c50a](https://github.com/MarioJames/lobehub-sit-typescript/commit/267c50ad682779400f41d4addc02a273322eb5ad))
+
+
+### Chores
+
+* update SDK settings ([73c2e5f](https://github.com/MarioJames/lobehub-sit-typescript/commit/73c2e5fc3f19896588b56c8aa1bb75606b3bcfc7))
+* update SDK settings ([3e3968e](https://github.com/MarioJames/lobehub-sit-typescript/commit/3e3968e2b300158fd56e713b9f845de9eb5ed749))
+
 ## 1.5.0 (2025-11-19)
 
 Full Changelog: [v1.4.0...v1.5.0](https://github.com/MarioJames/lobehub-sit-typescript/compare/v1.4.0...v1.5.0)
