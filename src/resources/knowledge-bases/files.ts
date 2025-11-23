@@ -2,6 +2,7 @@
 
 import { APIResource } from '../../core/resource';
 import * as FilesAPI from '../files';
+import * as KnowledgeBasesAPI from './knowledge-bases';
 import * as UsersAPI from '../users/users';
 import { APIPromise } from '../../core/api-promise';
 import { RequestOptions } from '../../internal/request-options';
@@ -22,6 +23,50 @@ export class Files extends APIResource {
   ): APIPromise<FilesAPI.APIResponseFileList> {
     return this._client.get(path`/knowledge-bases/${id}/files`, { query, ...options });
   }
+
+  /**
+   * Create associations between a knowledge base and multiple files.
+   *
+   * - Requires KNOWLEDGE_BASE_UPDATE permission
+   * - Ignores duplicate associations (on conflict do nothing)
+   * - Only files owned by the current user are processed
+   */
+  batchAdd(
+    id: string,
+    body: FileBatchAddParams,
+    options?: RequestOptions,
+  ): APIPromise<KnowledgeBasesAPI.APIResponseKnowledgeBaseFileOperation> {
+    return this._client.post(path`/knowledge-bases/${id}/files/batch`, { body, ...options });
+  }
+
+  /**
+   * Remove associations between a knowledge base and multiple files.
+   *
+   * - Requires KNOWLEDGE_BASE_UPDATE permission
+   * - Ignores records that are not linked to the knowledge base
+   */
+  batchRemove(
+    id: string,
+    body: FileBatchRemoveParams,
+    options?: RequestOptions,
+  ): APIPromise<KnowledgeBasesAPI.APIResponseKnowledgeBaseFileOperation> {
+    return this._client.delete(path`/knowledge-bases/${id}/files/batch`, { body, ...options });
+  }
+
+  /**
+   * Move multiple files from the source knowledge base to a target knowledge base.
+   *
+   * - Requires KNOWLEDGE_BASE_UPDATE permission
+   * - Removes links from the source knowledge base
+   * - Existing links in the target knowledge base are skipped without error
+   */
+  move(
+    id: string,
+    body: FileMoveParams,
+    options?: RequestOptions,
+  ): APIPromise<KnowledgeBasesAPI.APIResponseMoveKnowledgeBaseFiles> {
+    return this._client.post(path`/knowledge-bases/${id}/files/move`, { body, ...options });
+  }
 }
 
 export interface KBAPIResponseFileList extends UsersAPI.APIResponseBase {
@@ -39,6 +84,14 @@ export namespace KBAPIResponseFileList {
      */
     totalSize?: string;
   }
+}
+
+export interface KBAPIResponseFileOperation extends UsersAPI.APIResponseBase {
+  data: KnowledgeBasesAPI.KnowledgeBaseFileOperationResult;
+}
+
+export interface KBAPIResponseMoveFiles extends UsersAPI.APIResponseBase {
+  data: KnowledgeBasesAPI.MoveKnowledgeBaseFilesResult;
 }
 
 export interface KBFile {
@@ -163,10 +216,41 @@ export interface FileListParams {
   pageSize?: number;
 }
 
+export interface FileBatchAddParams {
+  /**
+   * Array of file IDs to associate
+   */
+  fileIds: Array<string>;
+}
+
+export interface FileBatchRemoveParams {
+  /**
+   * Array of file IDs to detach
+   */
+  fileIds: Array<string>;
+}
+
+export interface FileMoveParams {
+  /**
+   * Array of file IDs to move
+   */
+  fileIds: Array<string>;
+
+  /**
+   * Target knowledge base ID
+   */
+  targetKnowledgeBaseId: string;
+}
+
 export declare namespace Files {
   export {
     type KBAPIResponseFileList as KBAPIResponseFileList,
+    type KBAPIResponseFileOperation as KBAPIResponseFileOperation,
+    type KBAPIResponseMoveFiles as KBAPIResponseMoveFiles,
     type KBFile as KBFile,
     type FileListParams as FileListParams,
+    type FileBatchAddParams as FileBatchAddParams,
+    type FileBatchRemoveParams as FileBatchRemoveParams,
+    type FileMoveParams as FileMoveParams,
   };
 }
