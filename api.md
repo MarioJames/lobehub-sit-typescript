@@ -254,12 +254,16 @@ Types:
 
 - <code><a href="./src/resources/knowledge-bases/knowledge-bases.ts">APIResponseKnowledgeBase</a></code>
 - <code><a href="./src/resources/knowledge-bases/knowledge-bases.ts">APIResponseKnowledgeBaseDelete</a></code>
+- <code><a href="./src/resources/knowledge-bases/knowledge-bases.ts">APIResponseKnowledgeBaseFileOperation</a></code>
 - <code><a href="./src/resources/knowledge-bases/knowledge-bases.ts">APIResponseKnowledgeBaseList</a></code>
+- <code><a href="./src/resources/knowledge-bases/knowledge-bases.ts">APIResponseMoveKnowledgeBaseFiles</a></code>
 - <code><a href="./src/resources/knowledge-bases/knowledge-bases.ts">CreateKnowledgeBaseRequest</a></code>
 - <code><a href="./src/resources/knowledge-bases/knowledge-bases.ts">KBAPIResponseFileList</a></code>
 - <code><a href="./src/resources/knowledge-bases/knowledge-bases.ts">KBFile</a></code>
 - <code><a href="./src/resources/knowledge-bases/knowledge-bases.ts">KnowledgeBase</a></code>
+- <code><a href="./src/resources/knowledge-bases/knowledge-bases.ts">KnowledgeBaseFileOperationResult</a></code>
 - <code><a href="./src/resources/knowledge-bases/knowledge-bases.ts">KnowledgeBaseListItem</a></code>
+- <code><a href="./src/resources/knowledge-bases/knowledge-bases.ts">MoveKnowledgeBaseFilesResult</a></code>
 - <code><a href="./src/resources/knowledge-bases/knowledge-bases.ts">UpdateKnowledgeBaseRequest</a></code>
 
 Methods:
@@ -275,8 +279,13 @@ Methods:
 Types:
 
 - <code><a href="./src/resources/knowledge-bases/files.ts">KBAPIResponseFileList</a></code>
+- <code><a href="./src/resources/knowledge-bases/files.ts">KBAPIResponseFileOperation</a></code>
+- <code><a href="./src/resources/knowledge-bases/files.ts">KBAPIResponseMoveFiles</a></code>
 - <code><a href="./src/resources/knowledge-bases/files.ts">KBFile</a></code>
 
 Methods:
 
 - <code title="get /knowledge-bases/{id}/files">client.knowledgeBases.files.<a href="./src/resources/knowledge-bases/files.ts">list</a>(id, { ...params }) -> APIResponseFileList</code>
+- <code title="post /knowledge-bases/{id}/files/batch">client.knowledgeBases.files.<a href="./src/resources/knowledge-bases/files.ts">batchAdd</a>(id, { ...params }) -> APIResponseKnowledgeBaseFileOperation</code>
+- <code title="delete /knowledge-bases/{id}/files/batch">client.knowledgeBases.files.<a href="./src/resources/knowledge-bases/files.ts">batchRemove</a>(id, { ...params }) -> APIResponseKnowledgeBaseFileOperation</code>
+- <code title="post /knowledge-bases/{id}/files/move">client.knowledgeBases.files.<a href="./src/resources/knowledge-bases/files.ts">move</a>(id, { ...params }) -> APIResponseMoveKnowledgeBaseFiles</code>
