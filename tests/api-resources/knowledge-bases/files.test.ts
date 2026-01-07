@@ -26,7 +26,12 @@ describe('resource files', () => {
     await expect(
       client.knowledgeBases.files.list(
         'id',
-        { fileType: 'fileType', keyword: 'keyword', page: 1, pageSize: 1 },
+        {
+          fileType: 'fileType',
+          keyword: 'keyword',
+          page: 1,
+          pageSize: 1,
+        },
         { path: '/_stainless_unknown_path' },
       ),
     ).rejects.toThrow(LobehubSit.NotFoundError);
