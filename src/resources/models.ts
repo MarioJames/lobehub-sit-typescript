@@ -158,77 +158,77 @@ export interface ModelRetrieveParams {
 
 export interface ModelUpdateParams {
   /**
-   * Path param:
+   * Path param
    */
   path_providerId: string;
 
   /**
-   * Body param:
+   * Body param
    */
   id: string;
 
   /**
-   * Body param:
+   * Body param
    */
   displayName: string;
 
   /**
-   * Body param:
+   * Body param
    */
   body_providerId: string;
 
   /**
-   * Body param:
+   * Body param
    */
   abilities?: { [key: string]: unknown } | null;
 
   /**
-   * Body param:
+   * Body param
    */
   contextWindowTokens?: number | null;
 
   /**
-   * Body param:
+   * Body param
    */
   description?: string | null;
 
   /**
-   * Body param:
+   * Body param
    */
   enabled?: boolean | null;
 
   /**
-   * Body param:
+   * Body param
    */
   organization?: string | null;
 
   /**
-   * Body param:
+   * Body param
    */
   parameters?: { [key: string]: unknown } | null;
 
   /**
-   * Body param:
+   * Body param
    */
   pricing?: { [key: string]: unknown } | null;
 
   /**
-   * Body param:
+   * Body param
    */
   releasedAt?: string | null;
 
   /**
-   * Body param:
+   * Body param
    */
   sort?: number | null;
 
   /**
-   * Body param:
+   * Body param
    */
   source?: 'remote' | 'custom' | 'builtin' | null;
 
   /**
-   * Body param:
+   * Body param
    */
   type?: 'chat' | 'embedding' | 'tts' | 'stt' | 'image' | 'text2video' | 'text2music' | 'realtime' | null;
 }
