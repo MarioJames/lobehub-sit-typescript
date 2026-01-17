@@ -1,5 +1,27 @@
 # Changelog
 
+## 1.6.1 (2026-01-17)
+
+Full Changelog: [v1.6.0...v1.6.1](https://github.com/MarioJames/lobehub-sit-typescript/compare/v1.6.0...v1.6.1)
+
+### Bug Fixes
+
+* **mcp:** correct code tool API endpoint ([1683849](https://github.com/MarioJames/lobehub-sit-typescript/commit/16838493f05804969996b14f6f749df52aed008f))
+* **mcp:** return correct lines on typescript errors ([91650c1](https://github.com/MarioJames/lobehub-sit-typescript/commit/91650c15524d765125a24c8039132cd33465f223))
+
+
+### Chores
+
+* break long lines in snippets into multiline ([a3b95be](https://github.com/MarioJames/lobehub-sit-typescript/commit/a3b95be65078f73232efd38ef64d87de746d5f63))
+* **client:** fix logger property type ([7c44281](https://github.com/MarioJames/lobehub-sit-typescript/commit/7c4428136fddae892c40f075e5a5dd30bf9eb9a2))
+* fix typo in descriptions ([94b0883](https://github.com/MarioJames/lobehub-sit-typescript/commit/94b088344cd908b08a8053ee1bd06d9360077256))
+* **internal:** codegen related update ([fb744d6](https://github.com/MarioJames/lobehub-sit-typescript/commit/fb744d64f4c8bfa7b3e4780edf4e9450a5386ab9))
+* **internal:** codegen related update ([b64569d](https://github.com/MarioJames/lobehub-sit-typescript/commit/b64569d54bc1cbc5e22c3ea67c42bb2169008acb))
+* **internal:** codegen related update ([94d8958](https://github.com/MarioJames/lobehub-sit-typescript/commit/94d8958dc9431b96cd59b88a9420217f3ec8ab48))
+* **internal:** update `actions/checkout` version ([8bb6a2b](https://github.com/MarioJames/lobehub-sit-typescript/commit/8bb6a2bb7d9f470424d9847582908af59eb35479))
+* **internal:** upgrade babel, qs, js-yaml ([003e2c3](https://github.com/MarioJames/lobehub-sit-typescript/commit/003e2c3b0115edd5b640dff6e6c12187c6712398))
+* **internal:** upgrade eslint ([fb389ba](https://github.com/MarioJames/lobehub-sit-typescript/commit/fb389ba8695f078bb310df7dff482e6ae61a73f7))
+
 ## 1.6.0 (2025-11-23)
 
 Full Changelog: [v1.5.0...v1.6.0](https://github.com/MarioJames/lobehub-sit-typescript/compare/v1.5.0...v1.6.0)
